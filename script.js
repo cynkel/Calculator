@@ -22,26 +22,13 @@ function operate(num_one, num_two, operation) {
         case "-":
             return subtract(num_one, num_two);
             break;
-        case "/":
+        case "÷":
             return divide(num_one, num_two);
             break;
-        case "*":
+        case "x":
             return multiply(num_one, num_two);
             break;
     }
-}
-
-let firstNumber = 0;
-let secondNumber = 1;
-let operator = "*";
-
-const display = document.querySelector(".live");
-const numberButton = document.querySelectorAll(".number");
-const test = numberButton[0].textContent;
-
-function populateDisplay(numberToPopulate) {
-    display.textContent += numberToPopulate;
-    setTextLength();
 }
 
 function setTextLength() {
@@ -61,6 +48,49 @@ function setTextLength() {
     }
 }
 
+function populateDisplay(numberToPopulate) {
+    display.textContent += numberToPopulate;
+    setTextLength();
+}
+
+function storeFirstNumber() {
+    firstNumber = display.textContent;
+    display.textContent = "";
+}
+
+function printResults() {
+    secondNumber = display.textContent;
+    results = operate(parseFloat(firstNumber), parseFloat(secondNumber), operator);
+    display.textContent = results;
+}
+
+function reset() {
+    firstNumber = 0;
+    secondNumber = 0;
+    operator = "";
+    display.textContent = "";
+}
+
+let firstNumber = 0;
+let secondNumber = 0;
+let operator = "";
+
+const display = document.querySelector(".live");
+const numberButton = document.querySelectorAll(".number");
+const arithmeticButtons = document.querySelectorAll(".arithmetic");
+const equalButton = document.querySelector(".equal");
+const allClear = document.querySelector(".allClear");
+allClear.addEventListener("click", reset);
+equalButton.addEventListener("click", () => printResults());
+
 for (let index = 0; index < numberButton.length; index++) {
     numberButton[index].addEventListener("click", () => populateDisplay(numberButton[index].textContent));  
+}
+
+for (let index = 0; index < arithmeticButtons.length; index++) {
+    arithmeticButtons[index].addEventListener("click", () =>  {
+        operator = arithmeticButtons[index].textContent;
+        storeFirstNumber();
+    }
+);  
 }
