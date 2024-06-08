@@ -74,10 +74,19 @@ function reset() {
     display.textContent = "";
 }
 
+function toggleSign() {
+    if(display.textContent.includes("-")) {
+        display.textContent = display.textContent.substring(1, display.textContent.length);
+    }else {
+        display.textContent = "-" + display.textContent;
+    }
+}
+
 let firstNumber = 0;
 let secondNumber = 0;
 let operator = "";
 
+const sign = document.querySelector(".sign");
 const display = document.querySelector(".live");
 const numberButton = document.querySelectorAll(".number");
 const arithmeticButtons = document.querySelectorAll(".arithmetic");
@@ -85,6 +94,7 @@ const equalButton = document.querySelector(".equal");
 const allClear = document.querySelector(".allClear");
 allClear.addEventListener("click", reset);
 equalButton.addEventListener("click", () => printResults());
+sign.addEventListener("click", toggleSign);
 
 for (let index = 0; index < numberButton.length; index++) {
     numberButton[index].addEventListener("click", () => populateDisplay(numberButton[index].textContent));  
