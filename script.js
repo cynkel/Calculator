@@ -62,6 +62,9 @@ function printResults() {
     secondNumber = display.textContent;
     results = operate(parseFloat(firstNumber), parseFloat(secondNumber), operator);
     display.textContent = results;
+    firstNumber = 0;
+    secondNumber = 0;
+    operator = "+";
 }
 
 function reset() {
@@ -89,8 +92,8 @@ for (let index = 0; index < numberButton.length; index++) {
 
 for (let index = 0; index < arithmeticButtons.length; index++) {
     arithmeticButtons[index].addEventListener("click", () =>  {
-        operator = arithmeticButtons[index].textContent;
-        storeFirstNumber();
+            operator = arithmeticButtons[index].textContent;
+            storeFirstNumber();
     }
 );  
 }
