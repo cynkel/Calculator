@@ -14,6 +14,10 @@ function multiply(num_one, num_two) {
     return num_one * num_two;
 }
 
+function percent(num_one) {
+    return num_one / 100;
+}
+
 function operate(num_one, num_two, operation) {
     switch(operation) {
         case "+":
@@ -28,6 +32,7 @@ function operate(num_one, num_two, operation) {
         case "x":
             return multiply(num_one, num_two);
             break;
+        
     }
 }
 
@@ -82,6 +87,12 @@ function toggleSign() {
     }
 }
 
+function checkForDecimal() {
+    if (display.textContent.includes(".")) {
+        percentage.removeEventListener();
+    }
+}
+
 let firstNumber = 0;
 let secondNumber = 0;
 let operator = "";
@@ -92,9 +103,19 @@ const numberButton = document.querySelectorAll(".number");
 const arithmeticButtons = document.querySelectorAll(".arithmetic");
 const equalButton = document.querySelector(".equal");
 const allClear = document.querySelector(".allClear");
+const percentage = document.querySelector(".percent");
+const decimal = document.querySelector(".decimal");
+decimal.addEventListener("click", () => {
+    checkForDecimal();
+    populateDisplay(decimal.textContent)
+}
+);
 allClear.addEventListener("click", reset);
 equalButton.addEventListener("click", () => printResults());
 sign.addEventListener("click", toggleSign);
+percentage.addEventListener("click", () => {
+    display.textContent = percent(display.textContent);
+})
 
 for (let index = 0; index < numberButton.length; index++) {
     numberButton[index].addEventListener("click", () => populateDisplay(numberButton[index].textContent));  
